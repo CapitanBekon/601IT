@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 border-end">
+        <h2>Secure Area</h2>
+        <p>Uses Django authentication, strict session management, and CSRF protection.</p>
+        <div class="d-grid gap-2">
+            <a href="/login/secure/" class="btn btn-success">Secure Login</a>
+            <a href="/register/" class="btn btn-outline-success">Register New Account</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>Insecure Area</h2>
+        <p>Vulnerable to SQL Injection, XSS, and weak session management.</p>
+        <a href="/login/insecure/" class="btn btn-danger">Insecure Login</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Insecure Store</h2>
+<p>Welcome, {{ user.username }}! (Role: {{ user.role }})</p>
+
+<!-- Vulnerability: Reflected XSS -->
+{% if search_q %}
+    <div class="alert alert-info">Result for: {{ search_q|safe }}</div>
+{% endif %}
+
+<form method="get" action="/store/insecure/">
+    <input type="text" name="q" placeholder="Search products..." value="{{ search_q }}">
+    <button type="submit">Search</button>
+</form>
+
+<div class="row mt-3">
+    {% for product in products %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name|safe }}</h5> <!-- Vulnerability: Stored XSS -->
+                <p class="card-text">{{ product.description|safe }}</p> <!-- Vulnerability: Stored XSS -->
+                <p class="card-text">${{ product.price }}</p>
+                <!-- Insecure: No CSRF Token and custom insecure cart action -->
+                <form method="post" action="/store/insecure/">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="number" name="qty" value="1" min="1" class="form-control mb-2">
+                    <button type="submit" class="btn btn-danger">Add to Cart (Insecure)</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="mt-3">
+    <a href="/cart/" class="btn btn-warning">View Cart (Insecure)</a>
+</div>
+{% endblock %}

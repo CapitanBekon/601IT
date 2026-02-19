@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Secure User Registration</h2>
+<p>Create a secure account to access the store.</p>
+<!-- Uses CSRF protection by default -->
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required>
+        <small class="form-text text-muted">Passwords are hashed using Argon2 or PBKDF2 (Secure).</small>
+    </div>
+    <div class="mb-3">
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Register Securely</button>
+</form>
+{% if error %}<div class="alert alert-danger mt-3">{{ error }}</div>{% endif %}
+{% endblock %}

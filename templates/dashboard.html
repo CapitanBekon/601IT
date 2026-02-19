@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Secure Hash (Argon2/PBKDF2)</th>
+            <th>Insecure Hash (MD5)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.username }}</td>
+            <td class="text-truncate" style="max-width: 150px;">{{ u.password }}</td>
+            <td>
+                {% if u.profile and u.profile.password_insecure %}
+                    {{ u.profile.password_insecure }}
+                {% else %}
+                    <span class="text-muted">Not Set</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

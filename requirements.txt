@@ -1,0 +1,10 @@
+Django>=5.0,<6.0
+psycopg2-binary>=2.9
+redis>=5.0
+django-redis>=5.4
+cryptography>=42.0
+argon2-cffi>=23.1
+gunicorn>=21.2
+# Vulnerable/Legacy for valid demonstration (but safely pin versions for now)
+PyYAML
+requests

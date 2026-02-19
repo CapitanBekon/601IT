@@ -1,0 +1,36 @@
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - SECRET_KEY=django-insecure-dev-key-change-in-prod
+      - DEBUG=1
+      - DB_NAME=store_db
+      - DB_USER=store_user
+      - DB_PASSWORD=store_password
+      - DB_HOST=db
+      - REDIS_HOST=redis
+  
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=store_db
+      - POSTGRES_USER=store_user
+      - POSTGRES_PASSWORD=store_password
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

@@ -2,16 +2,16 @@
 
 This is a **Demonstration Project** designed to showcase the difference between secure and insecure coding practices in a web application. It features two parallel implementations of an online store: one built with standard security controls, and another deliberately engineered with OWASP Top 10 vulnerabilities.
 
-**⚠️ WARNING: DO NOT DEPLOY THE INSECURE VERSION TO A PRODUCTION ENVIRONMENT.**
+**WARNING: DO NOT DEPLOY THE INSECURE VERSION TO A PRODUCTION ENVIRONMENT.**
 
-## 🔍 Project Overview
+## Project Overview
 
 The application is built with **Django 5.x** and serves two distinct paths:
 
-*   **🟢 Secure Path (`/store/secure/`)**: Implements strict session management (Redis), `Argon2` password hashing, parameterized ORM queries, and CSRF protection.
-*   **🔴 Insecure Path (`/store/insecure/`)**: Intentionally vulnerable to SQL Injection, Cross-Site Scripting (XSS), insecure session management (Base64 cookies), and Broken Access Control.
+*   **Secure Path (`/store/secure/`)**: Implements strict session management (Redis), `Argon2` password hashing, parameterized ORM queries, and CSRF protection.
+*   **Insecure Path (`/store/insecure/`)**: Intentionally vulnerable to SQL Injection, Cross-Site Scripting (XSS), insecure session management (Base64 cookies), and Broken Access Control.
 
-## ✨ Features
+## Features
 
 | Feature | Secure Implementation | Insecure Implementation |
 | :--- | :--- | :--- |
@@ -23,7 +23,7 @@ The application is built with **Django 5.x** and serves two distinct paths:
 | **Input Validation** | Strict Form Validation | None / Reflected Input |
 | **XSS Protection** | Auto-escaping ON | Auto-escaping OFF (`|safe`) |
 
-## 🚀 Getting Started
+## etting Started
 
 ### Option A: Docker (Recommended)
 This spins up the Django App, PostgreSQL, and Redis in isolated containers.
@@ -62,7 +62,7 @@ python seed_db.py
 python manage.py runserver
 ```
 
-## 🛠️ Usage
+## Usage
 
 ### 1. Registration
 Go to `/register/` to create an account. This uses the **secure** method by default but also generates a weak hash for the insecure demonstration.
@@ -76,7 +76,7 @@ Go to `/register/` to create an account. This uses the **secure** method by defa
 ### 3. Admin Dashboard
 Log in to the **Secure** area with the admin account created by `seed_db.py` (User: `admin`, Pass: `adminpass`). Access the dashboard at `/dashboard/`.
 
-## 🧪 Security Testing
+## Security Testing
 A script is included to verify the vulnerabilities in the insecure path.
 
 ```bash
